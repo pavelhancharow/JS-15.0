@@ -1,7 +1,7 @@
 'use strict';
 
 const money = 500;
-const income = '250';
+const income = 'freelance';
 const addExpenses = 'Internet, Food, Pay for housing payments';
 const deposit = true;
 const mission = 1500;
