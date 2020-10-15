@@ -43,8 +43,6 @@ let getExpensesMonth = function () {
     }
     a += +sum;
   }
-
-  console.log(expenses);
   return a;
 };
 
@@ -69,17 +67,17 @@ if (getTargetMonth() > 0) {
 }
 
 let budgetDay = Math.floor(accumulatedMonth / 30);
-console.log('Бюджет на день: ', budgetDay);
+if (budgetDay > 0) {
+  console.log('Бюджет на день: ', budgetDay);
+}
 
 function getStatusIncome() {
   if (budgetDay > 1200) {
     return 'У вас высокий уровень дохода!';
   } else if (budgetDay > 600 && budgetDay <= 1200) {
     return 'У вас средний уровень дохода.';
-  } else if (budgetDay <= 600 && budgetDay >= 0) {
+  } else if (budgetDay <= 600 && budgetDay >= 1) {
     return 'К сожалению у вас уровень дохода ниже среднего.';
-  } else {
-    return 'Что то пошло не так...';
   }
 }
 console.log(getStatusIncome());
