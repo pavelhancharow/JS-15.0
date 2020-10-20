@@ -1,5 +1,26 @@
 'use strict';
 
+let calc = document.getElementById('start'),
+  addIncomeBtn = document.getElementsByTagName('button')[0],
+  addExpensesBtn = document.getElementsByTagName('button')[1],
+  checkBox = document.querySelector('#deposit-check'),
+  additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
+  budgetMonthValue = document.querySelectorAll('[class$=-value]')[0],
+  budgetDayValue = document.querySelectorAll('[class$=-value]')[1],
+  expensesMonthValue = document.querySelectorAll('[class$=-value]')[2],
+  additionalIncomeValue = document.querySelectorAll('[class$=-value]')[3],
+  additionalExpensesValue = document.querySelectorAll('[class$=-value]')[4],
+  incomePeriodValue = document.querySelectorAll('[class$=-value]')[5],
+  targetMonthValue = document.querySelectorAll('[class$=-value]')[6],
+  salaryAmount = document.querySelector('.salary-amount'),
+  incomeTitle = document.querySelector('.income-title'),
+  incomeAmount = document.querySelector('.income-amount'),
+  expensesTitle = document.querySelector('.expenses-title'),
+  expensesAmount = document.querySelector('.expenses-amount'),
+  additionalExpensesItem = document.querySelector('.additional_expenses-item'),
+  targetAmount = document.querySelector('.target-amount'),
+  periodSelect = document.querySelector('[type=range]');
+
 let isNumber = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -108,7 +129,7 @@ let appData = {
 // appData.getStatusIncome();
 // appData.getInfoDeposit();
 // appData.calcSavedMonth();
-for (let key in appData) {
-  console.log(`Наша программа включает в себя данные: ${key} = ${appData[key]}`);
-}
-console.log(appData.addExpenses.join(', '));
+// for (let key in appData) {
+//   console.log(`Наша программа включает в себя данные: ${key} = ${appData[key]}`);
+// }
+// console.log(appData.addExpenses.join(', '));
