@@ -34,12 +34,12 @@ let appData = {
         cashIncome = +prompt('Сколько в месц вы на этом зарабатываете?', 10000);
       } while (!isNumber(cashIncome) || cashIncome === 0);
       appData.income[itemIncome] = cashIncome;
-      console.log(appData.income);
     }
 
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую.', 'Квартплата, проездной, кредит');
-    appData.addExpenses = addExpenses.toLowerCase().split(', ');
+    appData.addExpenses = addExpenses.toLowerCase().split(',');
     for (let i = 0; i < appData.addExpenses.length; i++) {
+      appData.addExpenses[i] = appData.addExpenses[i].trim();
       appData.addExpenses[i] = appData.addExpenses[i][0].toUpperCase() + appData.addExpenses[i].slice(1);
     }
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
