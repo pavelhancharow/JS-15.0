@@ -11,7 +11,7 @@ let money,
     } while (!isNumber(money));
   };
 
-start();
+// start();
 
 let appData = {
   income: {},
@@ -101,13 +101,13 @@ let appData = {
   }
 };
 
-appData.asking();
-appData.getExpensesMonth();
-appData.getBudget();
-appData.getTargetMonth();
-appData.getStatusIncome();
-appData.getInfoDeposit();
-appData.calcSavedMonth();
+// appData.asking();
+// appData.getExpensesMonth();
+// appData.getBudget();
+// appData.getTargetMonth();
+// appData.getStatusIncome();
+// appData.getInfoDeposit();
+// appData.calcSavedMonth();
 for (let key in appData) {
   console.log(`Наша программа включает в себя данные: ${key} = ${appData[key]}`);
 }
