@@ -1,9 +1,10 @@
 'use strict';
 
 let calc = document.getElementById('start'),
-  addIncomeBtn = document.getElementsByTagName('button')[0],
-  addExpensesBtn = document.getElementsByTagName('button')[1],
-  checkBox = document.querySelector('#deposit-check'),
+  btnPlus = document.getElementsByTagName('button'),
+  addIncomeBtn = btnPlus[0],
+  addExpensesBtn = btnPlus[1],
+  depositCheck = document.querySelector('#deposit-check'),
   additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
   additionalIncomeItemOne = additionalIncomeItem[0],
   additionalIncomeItemTwo = additionalIncomeItem[1],
