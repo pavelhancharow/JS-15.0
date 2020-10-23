@@ -21,7 +21,10 @@ let start = document.getElementById('start'),
   additionalExpensesItem = document.querySelector('.additional_expenses-item'),
   targetAmount = document.querySelector('.target-amount'),
   periodSelect = document.querySelector('.period-select'),
-  incomeItems = document.querySelectorAll('.income-items');
+  incomeItems = document.querySelectorAll('.income-items'),
+  expensesAmount = document.querySelector('.expenses-amount'),
+  placeholderTitle = document.querySelectorAll('[placeholder="Наименование"]'),
+  placeholderAmount = document.querySelectorAll('[placeholder="Сумма"]');
 
 let isNumber = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
@@ -47,11 +50,6 @@ let appData = {
   },
   start: function () {
 
-    // if (salaryAmount.value === '') {
-    //   alert('Ошибка, поле "Месячный доход" должно быть заполнено!');
-    //   return;
-    // }
-
     appData.budget = +salaryAmount.value;
 
     appData.getExpenses();
@@ -76,18 +74,35 @@ let appData = {
     periodSelect.addEventListener('input', appData.updateIncomePeriodValue);
   },
   addExpensesBlock: function () {
-    let cloneExpensesItem = expensesItems[0].cloneNode(true);
-    expensesItems[0].parentNode.append(cloneExpensesItem);
-    expensesPlus.before(cloneExpensesItem);
+    // let cloneExpensesItem = expensesItems[0].cloneNode(true);
+    // expensesItems[0].parentNode.append(cloneExpensesItem);
+    // expensesPlus.before(cloneExpensesItem);
+
+    expensesItems[0].insertAdjacentHTML('beforeend', `
+          <div class="expenses-items">
+            <input type="text" class="expenses-title" placeholder="Наименование">
+            <input type="text" class="expenses-amount" placeholder="Сумма">
+          </div>
+    `);
+    expensesPlus.before(expensesItems[0]);
+
     expensesItems = document.querySelectorAll('.expenses-items');
     if (expensesItems.length === 3) {
       expensesPlus.style.display = 'none';
     }
   },
   addIncomeBlock: function () {
-    let cloneIncomeBlock = incomeItems[0].cloneNode(true);
-    incomeItems[0].parentNode.append(cloneIncomeBlock);
-    incomePlus.before(cloneIncomeBlock);
+    // let cloneIncomeBlock = incomeItems[0].cloneNode(true);
+    // incomeItems[0].parentNode.append(cloneIncomeBlock);
+    // incomePlus.before(cloneIncomeBlock);
+
+    incomeItems[0].insertAdjacentHTML('beforeend', `
+          <div class="income-items">
+            <input type="text" class="income-title" placeholder="Наименование">
+            <input type="text" class="income-amount" placeholder="Сумма">
+          </div>
+    `);
+    incomePlus.before(incomeItems[0]);
     incomeItems = document.querySelectorAll('.income-items');
     if (incomeItems.length === 3) {
       incomePlus.style.display = 'none';
@@ -109,6 +124,8 @@ let appData = {
       if (itemIncome !== '' && cashIncome !== '') {
         appData.income[itemIncome] = +cashIncome;
       }
+
+
     });
 
     for (let key in appData.income) {
@@ -175,11 +192,26 @@ let appData = {
   },*/
 };
 
+placeholderTitle.forEach(function (item) {
+  item.addEventListener('input', function () {
+    item.value = item.value.replace(/[a-zA-Z0-9]/, '');
+  });
+});
+
+placeholderAmount.forEach(function (item) {
+  item.addEventListener('input', function () {
+    item.value = item.value.replace(/[^0-9]/, '');
+  });
+});
+
 salaryAmount.addEventListener('change', appData.allowEntry);
 start.addEventListener('click', appData.start);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.updateRangeValue);
+// placeholderTitle[0].addEventListener('input', function () {
+//   placeholderTitle[0].value = placeholderTitle[0].value.replace(/[^а-я]/, '');
+// });
 
   // for (let key in appData) {
   //   console.log(`Наша программа включает в себя данные: ${key} = ${appData[key]}`);
