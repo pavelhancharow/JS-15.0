@@ -203,6 +203,7 @@ let appData = {
 
     this.changeBtn();
     this.resetRangeValue();
+    this.resetResult();
     this.allowEntry();
   },
   changeBtn: function () {
@@ -253,6 +254,15 @@ let appData = {
     this.income = {};
     this.incomeMonth = 0;
     this.addIncome = [];
+  },
+  resetResult: function () {
+    budgetMonthValue.value = '';
+    budgetDayValue.value = '';
+    expensesMonthValue.value = '';
+    additionalExpensesValue.value = '';
+    additionalIncomeValue.value = '';
+    targetMonthValue.value = '';
+    incomePeriodValue.value = '';
   }
 };
 let startThis = appData.start.bind(appData),
