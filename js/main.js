@@ -288,28 +288,17 @@ AppData.prototype.resetResult = function () {
 };
 
 AppData.prototype.eventsListener = function () {
-
+  salaryAmount.addEventListener('change', this.allowEntry.bind(this));
+  periodSelect.addEventListener('input', this.updateRangeValue.bind(this));
+  expensesPlus.addEventListener('click', this.addExpensesBlock.bind(this));
+  incomePlus.addEventListener('click', this.addIncomeBlock.bind(this));
+  start.addEventListener('click', this.start.bind(this));
+  cancel.addEventListener('click', this.reset.bind(this));
 };
 
 const appData = new AppData();
 
-console.log(appData);
-
-
-let startThis = appData.start.bind(appData),
-  cancelThis = appData.reset.bind(appData),
-  incomePlusThis = appData.addIncomeBlock.bind(appData),
-  expensesPlusThis = appData.addExpensesBlock.bind(appData),
-  periodSelectThis = appData.updateRangeValue.bind(appData),
-  salaryAmountThis = appData.allowEntry.bind(appData);
-
-
-salaryAmount.addEventListener('change', salaryAmountThis);
-periodSelect.addEventListener('input', periodSelectThis);
-expensesPlus.addEventListener('click', expensesPlusThis);
-incomePlus.addEventListener('click', incomePlusThis);
-start.addEventListener('click', startThis);
-cancel.addEventListener('click', cancelThis);
+appData.eventsListener();
 
   // for (let key in appData) {
   //   console.log(`Наша программа включает в себя данные: ${key} = ${appData[key]}`);
