@@ -47,6 +47,22 @@ placeholderAmount.forEach(function (item) {
 });
 
 class AppData {
+  constructor() {
+    this.budget = 0;
+    this.budgetDay = 0;
+    this.budgetMonth = 0;
+    this.expensesMonth = 0;
+    this.income = {};
+    this.incomeMonth = 0;
+    this.addIncome = [];
+    this.expenses = {};
+    this.addExpenses = [];
+    this.deposit = false;
+    this.percentDeposit = 0;
+    this.moneyDeposit = 0;
+  }
+
+
   allowEntry() {
     start.disabled = (salaryAmount.value !== '' && isNumber(salaryAmount.value)) ? false : true;
   }
@@ -272,6 +288,7 @@ class AppData {
     targetMonthValue.value = '';
     incomePeriodValue.value = '';
   }
+
   eventsListener() {
     salaryAmount.addEventListener('change', this.allowEntry.bind(this));
     periodSelect.addEventListener('input', this.updateRangeValue.bind(this));
@@ -280,22 +297,10 @@ class AppData {
     start.addEventListener('click', this.start.bind(this));
     cancel.addEventListener('click', this.reset.bind(this));
   }
+
 }
 
-const appData = new AppData({
-  budget: 0,
-  budgetDay: 0,
-  budgetMonth: 0,
-  expensesMonth: 0,
-  income: {},
-  incomeMonth: 0,
-  addIncome: [],
-  expenses: {},
-  addExpenses: [],
-  deposit: false,
-  percentDeposit: 0,
-  moneyDeposit: 0,
-});
+const appData = new AppData();
 
 appData.eventsListener();
 
