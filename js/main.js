@@ -64,8 +64,6 @@ class AppData {
     this.percentDeposit = 0;
     this.moneyDeposit = 0;
   }
-
-
   allowEntry() {
     start.disabled = (salaryAmount.value !== '' && isNumber(salaryAmount.value)) ? false : true;
   }
@@ -351,7 +349,6 @@ class AppData {
     targetMonthValue.value = '';
     incomePeriodValue.value = '';
   }
-
   eventsListener() {
     salaryAmount.addEventListener('change', this.allowEntry.bind(this));
     depositPercent.addEventListener('change', this.validPercent.bind(this));
@@ -362,14 +359,8 @@ class AppData {
     start.addEventListener('click', this.start.bind(this));
     cancel.addEventListener('click', this.reset.bind(this));
   }
-
 }
 
 const appData = new AppData();
 
 appData.eventsListener();
-
-  // for (let key in appData) {
-  //   console.log(`Наша программа включает в себя данные: ${key} = ${appData[key]}`);
-  // }
-  // console.log(appData.addExpenses.join(', '));
