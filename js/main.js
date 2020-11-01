@@ -1,5 +1,9 @@
 'use strict';
 
+let isNumber = (n) => {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
 let start = document.getElementById('start'),
   btnPlus = document.getElementsByTagName('button'),
   incomePlus = btnPlus[0],
@@ -26,28 +30,10 @@ let start = document.getElementById('start'),
   depositBank = document.querySelector('.deposit-bank'),
   depositAmount = document.querySelector('.deposit-amount'),
   depositPercent = document.querySelector('.deposit-percent'),
-  placeholderTitle = document.querySelectorAll('[placeholder="Наименование"]'),
-  placeholderAmount = document.querySelectorAll('[placeholder="Сумма"]'),
   data = document.querySelector('.data'),
   cancel = document.getElementById('cancel');
 
-let isNumber = function (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-};
-
 start.disabled = true;
-
-placeholderTitle.forEach(function (item) {
-  item.addEventListener('input', function () {
-    item.value = item.value.replace(/[a-zA-Z0-9]/, '');
-  });
-});
-
-placeholderAmount.forEach(function (item) {
-  item.addEventListener('input', function () {
-    item.value = item.value.replace(/[^0-9]/, '');
-  });
-});
 
 class AppData {
   constructor() {
@@ -63,6 +49,22 @@ class AppData {
     this.deposit = false;
     this.percentDeposit = 0;
     this.moneyDeposit = 0;
+  }
+  validInputs() {
+    const placeholderTitle = document.querySelectorAll('[placeholder="Наименование"]'),
+      placeholderAmount = document.querySelectorAll('[placeholder="Сумма"]');
+
+    placeholderTitle.forEach((item) => {
+      item.addEventListener('input', () => {
+        item.value = item.value.replace(/[a-zA-Z0-9]/, '');
+      });
+    });
+
+    placeholderAmount.forEach((item) => {
+      item.addEventListener('input', () => {
+        item.value = item.value.replace(/[^0-9]/, '');
+      });
+    });
   }
   allowEntry() {
     start.disabled = (salaryAmount.value !== '' && isNumber(salaryAmount.value)) ? false : true;
@@ -94,7 +96,7 @@ class AppData {
     periodSelect.addEventListener('input', this.updateIncomePeriodValue);
   }
   addExpensesBlock() {
-    let div = document.createElement('div');
+    const div = document.createElement('div');
     div.classList.add('expenses-items');
     div.innerHTML = `
             <input type="text" class="expenses-title" placeholder="Наименование">
@@ -104,27 +106,15 @@ class AppData {
     expensesPlus.before(div);
 
     expensesItems = document.querySelectorAll('.expenses-items');
-    placeholderTitle = document.querySelectorAll('[placeholder="Наименование"]');
-    placeholderAmount = document.querySelectorAll('[placeholder="Сумма"]');
 
     if (expensesItems.length === 3) {
       expensesPlus.style.display = 'none';
     }
 
-    placeholderTitle.forEach(function (item) {
-      item.addEventListener('input', function () {
-        item.value = item.value.replace(/[a-zA-Z0-9]/, '');
-      });
-    });
-
-    placeholderAmount.forEach(function (item) {
-      item.addEventListener('input', function () {
-        item.value = item.value.replace(/[^0-9]/, '');
-      });
-    });
+    this.validInputs();
   }
   addIncomeBlock() {
-    let div = document.createElement('div');
+    const div = document.createElement('div');
     div.classList.add('income-items');
     div.innerHTML = `
             <input type="text" class="income-title" placeholder="Наименование">
@@ -134,30 +124,18 @@ class AppData {
     incomePlus.before(div);
 
     incomeItems = document.querySelectorAll('.income-items');
-    placeholderTitle = document.querySelectorAll('[placeholder="Наименование"]');
-    placeholderAmount = document.querySelectorAll('[placeholder="Сумма"]');
 
     if (incomeItems.length === 3) {
       incomePlus.style.display = 'none';
     }
 
-    placeholderTitle.forEach(function (item) {
-      item.addEventListener('input', function () {
-        item.value = item.value.replace(/[a-zA-Z0-9]/, '');
-      });
-    });
-
-    placeholderAmount.forEach(function (item) {
-      item.addEventListener('input', function () {
-        item.value = item.value.replace(/[^0-9]/, '');
-      });
-    });
+    this.validInputs();
   }
   getExpenses() {
     const _this = this;
-    expensesItems.forEach(function (item) {
-      let itemExpenses = item.querySelector('.expenses-title').value;
-      let cashExpenses = item.querySelector('.expenses-amount').value;
+    expensesItems.forEach((item) => {
+      const itemExpenses = item.querySelector('.expenses-title').value,
+        cashExpenses = item.querySelector('.expenses-amount').value;
       if (itemExpenses !== '' && cashExpenses !== '') {
         _this.expenses[itemExpenses] = +cashExpenses;
       }
@@ -166,8 +144,8 @@ class AppData {
   getIncome() {
     const _this = this;
     incomeItems.forEach(function (item) {
-      let itemIncome = item.querySelector('.income-title').value;
-      let cashIncome = item.querySelector('.income-amount').value;
+      const itemIncome = item.querySelector('.income-title').value,
+        cashIncome = item.querySelector('.income-amount').value;
       if (itemIncome !== '' && cashIncome !== '') {
         _this.income[itemIncome] = +cashIncome;
       }
@@ -179,8 +157,8 @@ class AppData {
   }
   getAddExpenses() {
     const _this = this;
-    let addExpenses = additionalExpensesItem.value.split(',');
-    addExpenses.forEach(function (item) {
+    const addExpenses = additionalExpensesItem.value.split(',');
+    addExpenses.forEach((item) => {
       item = item.trim();
       if (item !== '') {
         _this.addExpenses.push(item);
@@ -189,8 +167,8 @@ class AppData {
   }
   getAddIncome() {
     const _this = this;
-    additionalIncomeItem.forEach(function (item) {
-      let itemValue = item.value.trim();
+    additionalIncomeItem.forEach((item) => {
+      const itemValue = item.value.trim();
       if (itemValue !== '') {
         _this.addIncome.push(itemValue);
       }
@@ -289,7 +267,7 @@ class AppData {
     this.allowEntry();
   }
   changeBtn() {
-    let inputAll = data.querySelectorAll('[type=text]');
+    const inputAll = data.querySelectorAll('[type=text]');
 
     inputAll.forEach((item) => {
       if (item.disabled === false) {
@@ -363,4 +341,5 @@ class AppData {
 
 const appData = new AppData();
 
+appData.validInputs();
 appData.eventsListener();
